@@ -1,0 +1,36 @@
+@import model.Activity
+@import helper._
+@(activities: List[Activity], activityForm: Form[Activity])
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <title>Minhas Atividades</title>
+    </head>
+    <body>
+
+        <h4><a href="http://localhost:9000/addActivity">Nova Atividade</a></h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Assunto</th>
+                    <th>Concluída</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(activity <- activities){
+                    <tr>
+                        <td><input type="text" value="@activity.getSubject" readonly="true"></td>
+                        <td><input type="checkbox" @if(activityForm("isDone").value() == "true"){checked="checked"} disabled></td>
+                        <td><input type="submit" class="" value="Editar"></td>
+                        @form(routes.ActivityController.deleteActivity(activity.getId)) {
+                            <td><input type="submit" value="Delete"></td>
+                        }
+                        <!--<td><input action="/delete" method="DELETE" type="submit" class="" value="Apagar"></td>-->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+@import model.Activity
+@import model.ActivityTypes
+@(myForm: Form[Activity])(activities: List[ActivityTypes])
+@import helper._
+<html>
+@main("Cadastrar Atividade") {
+    <form action="/addActivity" method="POST">
+
+        <p>Assunto: <input name="subject" id="subject" type="text" required="true" minlength="0" maxlength="200" placeholder="Assunto"></p>
+
+        <p>Concluída:
+        <select name="done" id="done">
+            <option value="0">Não</option>
+            <option value="1">Sim</option>
+        </select>
+        </p>
+
+        <p>Ação:
+        <select name="type" id="type">
+        @for(activity <- activities){
+            <option value="@activity.getKey_string">@activity.getName</option>
+        }
+        </select>
+        </p>
+
+        <p>Negócio:
+        <select name="deal_id" id="deal_id">
+            <option value="1">Negócio Meraki Fotografia</option>
+        </select>
+        </p>
+
+        <p>Data: <input type="date" name="due_date" id="due_date"></p>
+
+        <p>Hora: <input type="time" name="due_time" value="" id="due_time" class="time single" placeholder="" autocomplete="OFF"></p>
+
+        <input type="submit" value="Salvar">
+    </form>
+}
+
+</html>

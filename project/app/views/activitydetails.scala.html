@@ -1,0 +1,17 @@
+@import model.Activity
+@import model.ActivityTypes
+@(myForm: Form[Activity])(activities: List[ActivityTypes])
+  @import helper._
+  <html>
+  @main("Cadastrar Atividade") {
+    <form action="/editActivity" method="PUT">
+
+      <p>Assunto: <input name="subject" id="subject" type="text" required="true" minlength="0" maxlength="200" placeholder="Assunto"></p>
+
+
+
+      <input type="submit" value="Salvar">
+    </form>
+  }
+
+  </html>
